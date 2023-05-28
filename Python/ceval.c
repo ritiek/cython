@@ -2779,19 +2779,19 @@ main_loop:
         case TARGET(DELETE_NAME): {
             PyObject *name = GETITEM(names, oparg);
             PyObject *ns = f->f_locals;
-            int err;
-            if (ns == NULL) {
-                _PyErr_Format(tstate, PyExc_SystemError,
-                              "no locals when deleting %R", name);
-                goto error;
-            }
-            err = PyObject_DelItem(ns, name);
-            if (err != 0) {
-                format_exc_check_arg(tstate, PyExc_NameError,
-                                     NAME_ERROR_MSG,
-                                     name);
-                goto error;
-            }
+            // int err;
+            // if (ns == NULL) {
+            //     _PyErr_Format(tstate, PyExc_SystemError,
+            //                   "no locals when deleting %R", name);
+            //     goto error;
+            // }
+            // err = PyObject_DelItem(ns, name);
+            // if (err != 0) {
+            //     format_exc_check_arg(tstate, PyExc_NameError,
+            //                          NAME_ERROR_MSG,
+            //                          name);
+            //     goto error;
+            // }
             DISPATCH();
         }
 
@@ -2858,11 +2858,11 @@ main_loop:
         case TARGET(DELETE_ATTR): {
             PyObject *name = GETITEM(names, oparg);
             PyObject *owner = POP();
-            int err;
-            err = PyObject_SetAttr(owner, name, (PyObject *)NULL);
-            Py_DECREF(owner);
-            if (err != 0)
-                goto error;
+            // int err;
+            // err = PyObject_SetAttr(owner, name, (PyObject *)NULL);
+            // Py_DECREF(owner);
+            // if (err != 0)
+            //     goto error;
             DISPATCH();
         }
 
@@ -2879,15 +2879,15 @@ main_loop:
 
         case TARGET(DELETE_GLOBAL): {
             PyObject *name = GETITEM(names, oparg);
-            int err;
-            err = PyDict_DelItem(f->f_globals, name);
-            if (err != 0) {
-                if (_PyErr_ExceptionMatches(tstate, PyExc_KeyError)) {
-                    format_exc_check_arg(tstate, PyExc_NameError,
-                                         NAME_ERROR_MSG, name);
-                }
-                goto error;
-            }
+            // int err;
+            // err = PyDict_DelItem(f->f_globals, name);
+            // if (err != 0) {
+            //     if (_PyErr_ExceptionMatches(tstate, PyExc_KeyError)) {
+            //         format_exc_check_arg(tstate, PyExc_NameError,
+            //                              NAME_ERROR_MSG, name);
+            //     }
+            //     goto error;
+            // }
             DISPATCH();
         }
 
